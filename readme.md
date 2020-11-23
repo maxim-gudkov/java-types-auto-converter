@@ -1,6 +1,6 @@
 JavaTypeAutoConverter utility
 =====
-This project implements utility class for automatic cast objects to destination class
+This project implements utility class for automatic cast objects to destination class.  
 JavaTypeAutoConverter detect type of input object and select convertation way to destination class.
 ____
 Utility support many types transformations:
