@@ -17,7 +17,7 @@ public class CollectionToArray extends AbstractElementaryConverter implements Co
 
     @Override
     public boolean canConvert(@NotNull Object obj, @NotNull Class resultClass) {
-        return obj.getClass().isArray() && resultClass.isArray();
+        return obj.getClass().isAssignableFrom(Collection.class) && resultClass.isArray();
     }
 
     @Override
