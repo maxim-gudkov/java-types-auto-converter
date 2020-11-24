@@ -2,17 +2,22 @@ package com.github.maxim_gudkov.typeconverter;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 
 public interface CompositeConverter extends Converter {
 
-    void putElementaryConverters(LinkedHashSet<ElementaryConverter> convertersSet);
+    void putElementaryConverters(List<ElementaryConverter> converters);
 
     List<ElementaryConverter> getElementaryConverters();
 
-    ElementaryConverter getElementaryConverter(String converterId);
+    default ElementaryConverter getElementaryConverter(String converterId) {
+        Objects.requireNonNull(converterId, "converterId must be not null");
+        return getElementaryConverters().stream()
+                .filter(converter -> converter.getConverterId().equals(converterId))
+                .findFirst()
+                .orElse(null);
+    }
 
     default <T> T convert(Object obj, @NotNull Class<T> resultClass) {
         Objects.requireNonNull(resultClass, "Result class must be not null");
